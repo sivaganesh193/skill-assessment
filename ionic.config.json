@@ -1,0 +1,7 @@
+{
+  "name": "skill-assessment",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
