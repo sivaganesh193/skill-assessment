@@ -1,1 +1,52 @@
+.card-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: auto;
+    height: 100%;
+}
 
+.questions{
+    width: 70%;
+    height: 60%;
+    color: black;
+    background-color: white;
+}
+
+.result{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    height: 30%;
+    color: black;
+    background-color: white;
+}
+
+.heading{
+    border-radius: 4px;
+    margin-left: 0px;
+}
+
+.answer-desc{
+    border: 2px black solid;
+    border-radius: 4px;
+}
+
+.ans-mult{
+    background-color: #a09393;
+    color: red;
+}
+
+.next{
+    color:white;
+    position: absolute;
+    right: 2%;
+    top: 110%;
+}
+
+ion-list{
+    background-color: white;
+    border: 2px black solid;
+}
