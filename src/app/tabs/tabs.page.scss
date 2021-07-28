@@ -1,4 +1,3 @@
-
 .card-center{
     display: flex;
     justify-content: center;
@@ -9,8 +8,8 @@
 }
 
 .questions{
-    width: 70%;
-    height: 60%;
+    width: 75%;
+    height: auto;
     color: black;
     background-color: transparent;
     border: 2px #926239 solid;
@@ -20,10 +19,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 30%;
-    height: 30%;
+    width: 40%;
+    height: 50%;
     color: black;
-    background-color: white;
+    background-color: transparent;
+    border: 2px #926239 solid;
+    border-radius: 4px;
 }
 
 .heading{
@@ -49,17 +50,17 @@
 .next{
     color:white;
     justify-content: flex-end;
-    color: white;
     display: flex;
+    margin-top: 5%;
+    flex-direction: row;
     align-items: flex-end;
 }
 
 ion-list{
-    background-color: white;
+    background-color: transparent;
     // border: 1px black solid;
     border-radius: 4px;
 }
-  
   .landing{
     margin:0;
     padding:0;
@@ -91,8 +92,10 @@ ion-list{
     font-size:20px;
   }
   
+  
   #showcase .button{
     font-size:18px;
+    cursor: pointer;
     text-decoration:none;
     color:#926239;
     border:#926239 1px solid;
@@ -140,5 +143,17 @@ ion-list{
     color:#926239;
 }
 
-  
+.gauge{
+  padding-top: 10px;
+} 
 
+.tquestion{
+  margin-bottom: 7%;
+}
+
+.card-content-md h1 {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: center;
+}

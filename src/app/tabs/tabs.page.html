@@ -1,16 +1,3 @@
-<!-- <div class="jumbotron">
-  <div class="container">
-    <h1>Skill Assesment</h1>
-  </div>
-</div>
-
-<div class="card-center" *ngIf="!startTest">
-  <div class="box-1">
-    <div class="btn btn-one">
-      <span><h1>Start Test</h1></span>
-    </div>
-  </div>
-</div> -->
 <div class="landing" *ngIf="!startTest">
   <header id="showcase">
     <h1>Skill Based Assessment</h1>
@@ -52,7 +39,9 @@
         fill="solid"
         class="next"
         size="medium"
+        color="warning"
         (click)="nextQuestion()"
+        [disabled]="currentAnswer===''"
         >Next</ion-button
       >
     </ion-card-content>
@@ -60,9 +49,17 @@
 
   <ion-card class="result" *ngIf="result">
     <ion-card-content>
-      <h1>Skill Meter: <b>100%</b></h1>
-      <h1>Total Score: {{ score }}</h1>
-      <h1>Total Question: {{ totalQuestions }}</h1>
+      <!-- <h1>Total Score: {{ score }}</h1> -->
+      <h1 class="tquestion">Total Question: {{ totalQuestions }}</h1>
+      <rg-gauge-chart
+        [canvasWidth]="canvasWidth"
+        [needleValue]="finalScore"
+        [centralLabel]="centralLabel"
+        [options]="options"
+        [name]="name"
+        [bottomLabel]="bottomLabel"
+        class="gauge"
+      ></rg-gauge-chart>
     </ion-card-content>
   </ion-card>
 </div>

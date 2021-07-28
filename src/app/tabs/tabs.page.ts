@@ -14,12 +14,30 @@ export class TabsPage implements OnInit{
   score = 0;
   currentType: string;
   currentQuestion: Question;
-  currentAnswer: string;
+  currentAnswer = '';
   attendedQuestion: number[] = [];
   currentCategoryQuestions: Question[] = [];
   currentCategory = 0;
+  easyAnswer = 0;
+  easyQuestions = 0;
+  hardAnswer = 0;
+  hardQuestions = 0;
   categories: string[] = ['psychometric', 'aptitude', 'creativity', 'adaptability', 'verbal', 'teamwork'];
   difficulties: string[] = ['easy','hard'];
+  public canvasWidth = 300;
+  public centralLabel = '';
+  public name = 'Skill Meter';
+  public bottomLabel = '';
+  public options = {
+    hasNeedle: true,
+    needleColor: 'black',
+    needleUpdateSpeed: 1000,
+    arcColors: ['#FCE4D6', '#F8CBAD','#F4B084','#C65911','#833C0C'],
+    arcDelimiters: [20,40,60,80],
+    rangeLabel: ['0', '100'],
+    needleStartValue: 0,
+  };
+  public finalScore = 0;
 
   constructor() {}
   getCategoryQuestions(category: string){
@@ -45,11 +63,23 @@ export class TabsPage implements OnInit{
     if(this.currentCategory === this.categories.length - 1){
       this.result = true;
     }
+    if(this.currentQuestion.level === 'hard') {
+      this.hardQuestions++;
+    }
+    else {
+      this.easyQuestions++;
+    }
     this.totalQuestions ++;
     this.currentCategoryQuestions = this.currentCategoryQuestions.filter(q => q.id !== this.currentQuestion.id);
     if(this.currentAnswer === this.currentQuestion.answer){
       this.score = this.currentQuestion.level === 'easy'? this.score + 1 : this.score + 2;
+      if(this.currentQuestion.level === 'hard'){
+        this.hardAnswer++;
+        this.score += 2;
+      }
       if(this.currentQuestion.level === 'easy'){
+        this.easyAnswer++;
+        this.score += 1;
         this.currentCategoryQuestions = this.currentCategoryQuestions.filter(q => q.level === 'hard');
         if(this.currentCategoryQuestions.length > 0){
           nextCategory = false;
@@ -64,6 +94,10 @@ export class TabsPage implements OnInit{
       const easy = this.currentCategoryQuestions.filter(q => q.level === 'easy');
       this.currentQuestion = easy[Math.floor(Math.random() * easy.length)];
       this.currentType = this.currentQuestion.type;
+    }
+    if(this.result){
+      this.finalScore = ((this.easyAnswer / this.easyQuestions) * 25) + ((this.hardAnswer / this.hardQuestions) * 75);
+      this.bottomLabel =  this.finalScore.toFixed(2).toString() + '%';
     }
     this.currentAnswer = '';
 
