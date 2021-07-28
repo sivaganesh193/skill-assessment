@@ -11,11 +11,11 @@
     </div>
   </div>
 </div> -->
-<div>
+<div class="landing" *ngIf="!startTest">
   <header id="showcase">
-    <h1>Educarrear - Skill Based Assessment</h1>
-    <p>Start the test</p>
-    <a href="#" class="button">Read More</a>
+    <h1>Skill Based Assessment</h1>
+    <p>Future of young aspiring minds</p>
+    <a (click)="start()" class="button">Start Test</a>
   </header>
 </div>
 
