@@ -10,6 +10,8 @@ import { Question} from './question';
 export class TabsPage implements OnInit{
   startTest = false;
   result = false;
+  totalQuestions = 0;
+  score = 0;
   currentType: string;
   currentQuestion: Question;
   currentAnswer: string;
@@ -43,8 +45,10 @@ export class TabsPage implements OnInit{
     if(this.currentCategory === this.categories.length - 1){
       this.result = true;
     }
+    this.totalQuestions ++;
     this.currentCategoryQuestions = this.currentCategoryQuestions.filter(q => q.id !== this.currentQuestion.id);
     if(this.currentAnswer === this.currentQuestion.answer){
+      this.score = this.currentQuestion.level === 'easy'? this.score + 1 : this.score + 2;
       if(this.currentQuestion.level === 'easy'){
         this.currentCategoryQuestions = this.currentCategoryQuestions.filter(q => q.level === 'hard');
         if(this.currentCategoryQuestions.length > 0){

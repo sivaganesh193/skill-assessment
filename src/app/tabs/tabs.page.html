@@ -1,17 +1,28 @@
+<!-- <div class="jumbotron">
+  <div class="container">
+    <h1>Skill Assesment</h1>
+  </div>
+</div>
+
 <div class="card-center" *ngIf="!startTest">
-  <ion-card>
-    <ion-card-content>
-      <ion-button size="large" color="primary" (click)="start()"
-        >Start Test</ion-button
-      >
-    </ion-card-content>
-  </ion-card>
+  <div class="box-1">
+    <div class="btn btn-one">
+      <span><h1>Start Test</h1></span>
+    </div>
+  </div>
+</div> -->
+<div>
+  <header id="showcase">
+    <h1>Educarrear - Skill Based Assessment</h1>
+    <p>Start the test</p>
+    <a href="#" class="button">Read More</a>
+  </header>
 </div>
 
 <div class="card-center" *ngIf="startTest">
   <ion-card class="questions" *ngIf="!result">
     <ion-card-content>
-      <ion-card-header color="primary" class="heading" question-number
+      <ion-card-header class="heading" question-number
         ><b>{{ currentQuestion.questionName }}</b></ion-card-header
       >
       <br />
@@ -50,6 +61,8 @@
   <ion-card class="result" *ngIf="result">
     <ion-card-content>
       <h1>Skill Meter: <b>100%</b></h1>
+      <h1>Total Score: {{ score }}</h1>
+      <h1>Total Question: {{ totalQuestions }}</h1>
     </ion-card-content>
   </ion-card>
 </div>
