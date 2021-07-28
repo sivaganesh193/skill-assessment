@@ -40,8 +40,9 @@ export class TabsPage implements OnInit{
 
   nextQuestion(){
     let nextCategory = true;
-    console.log('nextQuestion');
-    console.log(this.currentAnswer);
+    if(this.currentCategory === this.categories.length - 1){
+      this.result = true;
+    }
     this.currentCategoryQuestions = this.currentCategoryQuestions.filter(q => q.id !== this.currentQuestion.id);
     if(this.currentAnswer === this.currentQuestion.answer){
       if(this.currentQuestion.level === 'easy'){
@@ -53,7 +54,7 @@ export class TabsPage implements OnInit{
         }
       }
     }
-    if(nextCategory === true){
+    if(nextCategory === true && !this.result){
       this.currentCategory++;
       this.currentCategoryQuestions = this.getCategoryQuestions(this.categories[this.currentCategory]);
       const easy = this.currentCategoryQuestions.filter(q => q.level === 'easy');
