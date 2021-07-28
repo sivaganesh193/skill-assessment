@@ -1,83 +1,70 @@
-import { Component } from '@angular/core';
-import { QUESTIONS } from "./questions";
-import { Question} from "./question";
+import { Component, OnInit } from '@angular/core';
+import { QUESTIONS } from './questions';
+import { Question} from './question';
 
 @Component({
   selector: 'app-tabs',
   templateUrl: 'tabs.page.html',
   styleUrls: ['tabs.page.scss']
 })
-export class TabsPage {
-  constructor() {}
-  start_test:boolean = false;
-  result:boolean = false;
-  current_type:String;
-  current_question: Question;
-  current_answer: String;
+export class TabsPage implements OnInit{
+  startTest = false;
+  result = false;
+  currentType: string;
+  currentQuestion: Question;
+  currentAnswer: string;
   attendedQuestion: number[] = [];
   currentCategoryQuestions: Question[] = [];
-  currentCategory:number = 0;
-  categories: String[] = ['psychometric', 'aptitude', 'creativity', 'adaptability', 'verbal', 'teamwork'];
-  difficulties:String[] = ['easy','hard']
+  currentCategory = 0;
+  categories: string[] = ['psychometric', 'aptitude', 'creativity', 'adaptability', 'verbal', 'teamwork'];
+  difficulties: string[] = ['easy','hard'];
 
-  getCategoryQuestions(category:String){
-    let ques = QUESTIONS.filter(q => q.category === category);
+  constructor() {}
+  getCategoryQuestions(category: string){
+    const ques = QUESTIONS.filter(q => q.category === category);
     return ques;
   }
 
-
   ngOnInit() {
     this.currentCategoryQuestions = this.getCategoryQuestions('psychometric');
-    let easy = this.currentCategoryQuestions.filter(q => q.level === 'easy');
-    this.current_question = easy[Math.floor(Math.random() * easy.length)];
-    this.attendedQuestion.push(this.current_question.id);
-    this.current_type = this.current_question.type;
+    const easy = this.currentCategoryQuestions.filter(q => q.level === 'easy');
+    this.currentQuestion = easy[Math.floor(Math.random() * easy.length)];
+    this.attendedQuestion.push(this.currentQuestion.id);
+    this.currentType = this.currentQuestion.type;
   }
 
   start(){
-    console.log("start");
-    this.start_test = true;
+    console.log('start');
+    this.startTest = true;
   }
 
   nextQuestion(){
-    console.log("nextQuestion");
-    console.log(this.current_answer);
-    this.currentCategoryQuestions = this.currentCategoryQuestions.filter(q => q.id !== this.current_question.id);
-    if(this.current_answer === this.current_question.answer){
-      if(this.current_question.level === "easy"){
-        this.currentCategoryQuestions = this.currentCategoryQuestions.filter(q => q.level === "hard");
+    let nextCategory = true;
+    console.log('nextQuestion');
+    console.log(this.currentAnswer);
+    this.currentCategoryQuestions = this.currentCategoryQuestions.filter(q => q.id !== this.currentQuestion.id);
+    if(this.currentAnswer === this.currentQuestion.answer){
+      if(this.currentQuestion.level === 'easy'){
+        this.currentCategoryQuestions = this.currentCategoryQuestions.filter(q => q.level === 'hard');
         if(this.currentCategoryQuestions.length > 0){
-          this.current_question = this.currentCategoryQuestions[Math.floor(Math.random() * this.currentCategoryQuestions.length)];
-          this.current_type = this.current_question.type;
+          nextCategory = false;
+          this.currentQuestion = this.currentCategoryQuestions[Math.floor(Math.random() * this.currentCategoryQuestions.length)];
+          this.currentType = this.currentQuestion.type;
         }
-        else{
-          this.currentCategory++;
-          this.currentCategoryQuestions = this.getCategoryQuestions(this.categories[this.currentCategory]);
-          let easy = this.currentCategoryQuestions.filter(q => q.level === "easy");
-          this.current_question = easy[Math.floor(Math.random() * easy.length)];
-          this.current_type = this.current_question.type;
-        }
-      }
-      else{
-        this.currentCategory++;
-        this.currentCategoryQuestions = this.getCategoryQuestions(this.categories[this.currentCategory]);
-        let easy = this.currentCategoryQuestions.filter(q => q.level === "easy");
-        this.current_question = easy[Math.floor(Math.random() * easy.length)];
-        this.current_type = this.current_question.type;
       }
     }
-    else{
+    if(nextCategory === true){
       this.currentCategory++;
       this.currentCategoryQuestions = this.getCategoryQuestions(this.categories[this.currentCategory]);
-      let easy = this.currentCategoryQuestions.filter(q => q.level === "easy");
-      this.current_question = easy[Math.floor(Math.random() * easy.length)];
-      this.current_type = this.current_question.type;
+      const easy = this.currentCategoryQuestions.filter(q => q.level === 'easy');
+      this.currentQuestion = easy[Math.floor(Math.random() * easy.length)];
+      this.currentType = this.currentQuestion.type;
     }
-    this.current_answer = "";
-    
+    this.currentAnswer = '';
+
   }
 
-  setAnswer(event:any){
-    this.current_answer = event.detail.value;
+  setAnswer(event: any){
+    this.currentAnswer = event.detail.value;
   }
 }

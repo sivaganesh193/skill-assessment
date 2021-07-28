@@ -1,33 +1,55 @@
-<div class="card-center" *ngIf="!start_test">
+<div class="card-center" *ngIf="!startTest">
   <ion-card>
     <ion-card-content>
-      <ion-button size="large" color="primary" (click)="start()">Start Test</ion-button>
+      <ion-button size="large" color="primary" (click)="start()"
+        >Start Test</ion-button
+      >
     </ion-card-content>
   </ion-card>
 </div>
 
-
-<div class="card-center" *ngIf="start_test">
+<div class="card-center" *ngIf="startTest">
   <ion-card class="questions" *ngIf="!result">
     <ion-card-content>
-      <ion-card-header color="primary" class="heading" question-number><b>{{ current_question.questionName }}</b></ion-card-header>
-      <br>
-      <ion-list *ngIf="current_type=='multiple'">
+      <ion-card-header color="primary" class="heading" question-number
+        ><b>{{ currentQuestion.questionName }}</b></ion-card-header
+      >
+      <br />
+      <ion-list *ngIf="currentType === 'multiple'">
         <ion-radio-group class="ans-mult" (ionChange)="setAnswer($event)">
-          <ion-item color="tertiary" *ngFor="let option of current_question.options">
+          <ion-item
+            color="tertiary"
+            *ngFor="let option of currentQuestion.options"
+          >
             <ion-label>{{ option }}</ion-label>
-            <ion-radio slot="start" color="success" [value] = "option"></ion-radio>
+            <ion-radio
+              slot="start"
+              color="success"
+              [value]="option"
+            ></ion-radio>
           </ion-item>
         </ion-radio-group>
       </ion-list>
-      <ion-textarea [(ngModel)]= "current_answer" *ngIf="current_type=='descriptive'" rows=10 class="answer-desc" placeholder="Answer the question in atleast 50 words."></ion-textarea>
-      <ion-button fill="solid" class="next" size="medium" (click)="nextQuestion()">Next</ion-button>
-    </ion-card-content> 
+      <ion-textarea
+        [(ngModel)]="currentAnswer"
+        *ngIf="currentType === 'descriptive'"
+        rows="10"
+        class="answer-desc"
+        placeholder="Answer the question in atleast 50 words."
+      ></ion-textarea>
+      <ion-button
+        fill="solid"
+        class="next"
+        size="medium"
+        (click)="nextQuestion()"
+        >Next</ion-button
+      >
+    </ion-card-content>
   </ion-card>
 
   <ion-card class="result" *ngIf="result">
     <ion-card-content>
       <h1>Skill Meter: <b>100%</b></h1>
-    </ion-card-content> 
+    </ion-card-content>
   </ion-card>
 </div>

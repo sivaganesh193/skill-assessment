@@ -40,6 +40,7 @@ export const QUESTIONS: Question[] = [
     },
     {
         id: 4,
+        // eslint-disable-next-line max-len
         questionName: 'Two trains running in opposite directions cross a man standing on the platform in 27 seconds and 17 seconds respectively and they cross each other in 23 seconds. The ratio of their speeds is:',
         answer: '3:2',
         level: 'hard',
@@ -60,6 +61,7 @@ export const QUESTIONS: Question[] = [
     },
     {
         id: 6,
+        // eslint-disable-next-line max-len
         questionName: 'The team leader has just made an impassioned plea to improve the level of cooperation that exists within the group. As the discussion develops you note:',
         answer: 'All team members really seem concerned with helping each other, and working as a team',
         level: 'easy',
@@ -81,7 +83,7 @@ export const QUESTIONS: Question[] = [
             'Adaptability skills',
             'Basic skills',
             'Math skills',
-            'Teamwork Skills' 
+            'Teamwork Skills'
         ],
         category: 'adaptability',
         type: 'multiple',
@@ -109,4 +111,4 @@ export const QUESTIONS: Question[] = [
         category: 'verbal',
         type: 'multiple',
     }
-]; 
+];
