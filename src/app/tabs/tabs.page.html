@@ -51,7 +51,7 @@
     <ion-card-content>
       <!-- <h1>Total Score: {{ score }}</h1> -->
       <h1 class="tquestion">Total Question: {{ totalQuestions }}</h1>
-      <rg-gauge-chart
+      <!-- <rg-gauge-chart
         [canvasWidth]="canvasWidth"
         [needleValue]="finalScore"
         [centralLabel]="centralLabel"
@@ -59,7 +59,16 @@
         [name]="name"
         [bottomLabel]="bottomLabel"
         class="gauge"
-      ></rg-gauge-chart>
+      ></rg-gauge-chart> -->
+      <div id="chart">
+        <apx-chart
+          [series]="chartOptions.series"
+          [chart]="chartOptions.chart"
+          [dataLabels]="chartOptions.dataLabels"
+          [plotOptions]="chartOptions.plotOptions"
+          [xaxis]="chartOptions.xaxis"
+        ></apx-chart>
+      </div>
     </ion-card-content>
   </ion-card>
 </div>
