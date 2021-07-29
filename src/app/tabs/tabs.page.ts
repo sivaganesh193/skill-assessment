@@ -31,7 +31,7 @@ export class TabsPage implements OnInit{
   public chartOptions: Partial<ChartOptions>;
 
   startTest = false;
-  result = true;
+  result = false;
   totalQuestions = 0;
   score = 0;
   currentType: string;
@@ -96,7 +96,7 @@ export class TabsPage implements OnInit{
       series: [
         {
           name: 'basic',
-          data: [100, 78, 10, 10, 10, 10]
+          data: [0,0,0,0,0,0]
         }
       ],
       chart: {
@@ -105,7 +105,14 @@ export class TabsPage implements OnInit{
       },
       plotOptions: {
         bar: {
-          horizontal: true
+          horizontal: true,
+          colors:{
+            ranges:[{
+              from: 0,
+              to: 100,
+                color:'#926239',
+            }]
+          }
         }
       },
       dataLabels: {
