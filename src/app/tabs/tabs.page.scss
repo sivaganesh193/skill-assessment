@@ -8,8 +8,9 @@
 }
 
 #chart {
-  max-width: 650px;
-  margin: 35px auto;
+  min-width: 300px;
+  max-width: 950px;
+  margin: 10px auto;
 }
 
 .questions{
@@ -24,8 +25,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 40%;
-    height: 50%;
+    width: 50%;
+    height: 57%;
     color: black;
     background-color: transparent;
     border: 2px #926239 solid;

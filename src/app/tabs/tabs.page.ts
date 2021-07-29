@@ -8,7 +8,7 @@ import {
   ApexDataLabels,
   ApexXAxis,
   ApexPlotOptions
-} from "ng-apexcharts";
+} from 'ng-apexcharts';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -25,9 +25,9 @@ export type ChartOptions = {
 })
 
 export class TabsPage implements OnInit{
-  @ViewChild("chart") chart: ChartComponent;
+  @ViewChild('chart') chart: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
-  
+
   startTest = false;
   result = true;
   totalQuestions = 0;
@@ -90,12 +90,12 @@ export class TabsPage implements OnInit{
     this.chartOptions = {
       series: [
         {
-          name: "basic",
-          data: [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380]
+          name: 'basic',
+          data: [75, 75, 75, 75, 25, 0]
         }
       ],
       chart: {
-        type: "bar",
+        type: 'bar',
         height: 350
       },
       plotOptions: {
@@ -108,16 +108,8 @@ export class TabsPage implements OnInit{
       },
       xaxis: {
         categories: [
-          "South Korea",
-          "Canada",
-          "United Kingdom",
-          "Netherlands",
-          "Italy",
-          "France",
-          "Japan",
-          "United States",
-          "China",
-          "Germany"
+          'Psychometric',
+          'Aptitude', 'Creativity', 'Adaptability', 'Verbal', 'Teamwork'
         ]
       }
     };
@@ -187,7 +179,7 @@ export class TabsPage implements OnInit{
       this.finalScore = ((this.easyAnswer / this.easyQuestions) * 25) + ((this.hardAnswer / this.hardQuestions) * 75);
       this.bottomLabel =  this.finalScore.toFixed(2).toString() + '%';
       console.log(this.categoryScores);
-      
+
     }
     this.currentAnswer = '';
 
