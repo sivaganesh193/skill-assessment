@@ -6,7 +6,14 @@
     margin: auto;
     height: 100%;
 }
-
+.charts{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-items: center;
+  align-content: space-between;
+}
 #chart {
   min-width: 300px;
   max-width: 950px;
@@ -153,9 +160,6 @@ ion-list{
   padding-top: 10px;
 } 
 
-.tquestion{
-  margin-bottom: 7%;
-}
 
 .card-content-md h1 {
   display: flex;

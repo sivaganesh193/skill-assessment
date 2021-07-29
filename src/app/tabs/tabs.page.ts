@@ -7,7 +7,8 @@ import {
   ChartComponent,
   ApexDataLabels,
   ApexXAxis,
-  ApexPlotOptions
+  ApexPlotOptions,
+  ApexFill
 } from 'ng-apexcharts';
 
 export type ChartOptions = {
@@ -16,6 +17,7 @@ export type ChartOptions = {
   dataLabels: ApexDataLabels;
   plotOptions: ApexPlotOptions;
   xaxis: ApexXAxis;
+  fill: ApexFill;
 };
 
 @Component({
@@ -88,10 +90,13 @@ export class TabsPage implements OnInit{
 
   constructor() {
     this.chartOptions = {
+      fill: {
+        colors: ['#FCE4D6', '#F8CBAD','#F4B084','#C65911','#833C0C','#926239']
+      },
       series: [
         {
           name: 'basic',
-          data: [75, 75, 75, 75, 25, 0]
+          data: [100, 78, 10, 10, 10, 10]
         }
       ],
       chart: {
@@ -104,14 +109,15 @@ export class TabsPage implements OnInit{
         }
       },
       dataLabels: {
-        enabled: false
+        enabled: true
       },
       xaxis: {
         categories: [
           'Psychometric',
           'Aptitude', 'Creativity', 'Adaptability', 'Verbal', 'Teamwork'
-        ]
-      }
+        ],
+        max: 100
+      },
     };
   }
   getCategoryQuestions(category: string){
@@ -176,6 +182,15 @@ export class TabsPage implements OnInit{
       this.currentType = this.currentQuestion.type;
     }
     if(this.result){
+      // for(let i = 0; i < 6; ++i){
+      //   this.chartOptions.series[0].data[i] =
+      // }
+      let i = 0;
+      this.categories.forEach(category => {
+        this.chartOptions.series[0].data[i]=(this.categoryScores[category].score/this.categoryScores[category].total) * 100;
+        ++i;
+      });
+
       this.finalScore = ((this.easyAnswer / this.easyQuestions) * 25) + ((this.hardAnswer / this.hardQuestions) * 75);
       this.bottomLabel =  this.finalScore.toFixed(2).toString() + '%';
       console.log(this.categoryScores);
