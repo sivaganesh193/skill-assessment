@@ -175,7 +175,7 @@ export class TabsPage implements OnInit{
       else {
         this.categoryScores[this.currentQuestion.category].total+=25;
       }
-      if(this.currentAnswer === this.currentQuestion.answer){
+      if(this.currentAnswer === this.currentQuestion.answer || this.currentType === 'descriptive'){
         this.score = this.currentQuestion.level === 'easy'? this.score + 1 : this.score + 2;
         if(this.currentQuestion.level === 'hard'){
           this.hardAnswer++;
@@ -216,7 +216,7 @@ export class TabsPage implements OnInit{
       else {
         this.categoryScores[this.currentQuestion.category].total+=25;
       }
-      if(this.currentAnswer === this.currentQuestion.answer){
+      if(this.currentAnswer === this.currentQuestion.answer || this.currentType === 'descriptive'){
         this.score = this.currentQuestion.level === 'easy'? this.score + 1 : this.score + 2;
         if(this.currentQuestion.level === 'hard'){
           this.hardAnswer++;
