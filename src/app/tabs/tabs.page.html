@@ -1,11 +1,63 @@
-<div class="landing" *ngIf="!startTest">
+<div class="landing" *ngIf="!base">
   <header id="showcase">
     <h1>Skill Meter</h1>
     <p>Future of young aspiring minds</p>
     <a (click)="start()" class="button">Start Test</a>
   </header>
 </div>
-
+<div class="card-center" *ngIf="startBox">
+  <ion-card class="start-box" *ngIf="!result">
+    <ion-card-content>
+      <ion-button
+        fill="solid"
+        class="items"
+        size="medium"
+        color="warning"
+        (click)="makeCategortyBased()"
+        >Choose a Category</ion-button
+      >
+      <ion-button
+        fill="solid"
+        class="items"
+        size="medium"
+        color="warning"
+        (click)="makeStart()"
+        >Random</ion-button
+      >
+    </ion-card-content>
+  </ion-card>
+</div>
+<div class="card-center" *ngIf="categoryBased">
+  <ion-card class="questions" *ngIf="!result">
+    <ion-card-content>
+      <ion-card-header class="heading" question-number
+        ><b>Choose a Category</b></ion-card-header
+      >
+      <br />
+      <ion-list>
+        <ion-radio-group class="ans-mult" (ionChange)="setCategory($event)">
+          <ion-item color="tertiary" *ngFor="let option of categories">
+            <ion-label>{{ option }}</ion-label>
+            <ion-radio
+              slot="start"
+              color="success"
+              [value]="option"
+            ></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-list>
+      <ion-button
+        fill="solid"
+        class="next"
+        size="medium"
+        color="warning"
+        (click)="makeStart()"
+        [disabled]="choosenCategory===''"
+        >Next</ion-button
+      >
+    </ion-card-content>
+  </ion-card>
+</div>
 <div class="card-center" *ngIf="startTest">
   <ion-card class="questions" *ngIf="!result">
     <ion-card-content>
@@ -61,7 +113,7 @@
           [bottomLabel]="bottomLabel"
           class="gauge"
         ></rg-gauge-chart>
-        <div id="chart">
+        <div id="chart" *ngIf="secondChart">
           <apx-chart
             [series]="chartOptions.series"
             [chart]="chartOptions.chart"

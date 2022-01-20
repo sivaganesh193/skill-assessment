@@ -30,11 +30,15 @@ export class TabsPage implements OnInit{
   @ViewChild('chart') chart: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
 
+  startBox = false;
+  categoryBased = false;
   startTest = false;
+  base = false;
   result = false;
   totalQuestions = 0;
   score = 0;
   currentType: string;
+  choosenCategory = '';
   currentQuestion: Question;
   currentAnswer = '';
   attendedQuestion: number[] = [];
@@ -44,6 +48,7 @@ export class TabsPage implements OnInit{
   easyQuestions = 0;
   hardAnswer = 0;
   hardQuestions = 0;
+  secondChart = false;
   categories: string[] = ['psychometric', 'aptitude', 'creativity', 'adaptability', 'verbal', 'teamwork'];
   difficulties: string[] = ['easy','hard'];
   public canvasWidth = 300;
@@ -142,56 +147,102 @@ export class TabsPage implements OnInit{
 
   start(){
     console.log('start');
-    this.startTest = true;
+    this.startBox = true;
+    // this.categoryBased = true;
+    // console.log(this.categoryBased);
+    this.base = true;
+    // this.startTest = true;
   }
 
   nextQuestion(){
-    let nextCategory = true;
-    if(this.currentCategory === this.categories.length - 1){
-      this.result = true;
-    }
-    if(this.currentQuestion.level === 'hard') {
-      this.hardQuestions++;
-    }
-    else {
-      this.easyQuestions++;
-    }
-    this.totalQuestions ++;
-    this.currentCategoryQuestions = this.currentCategoryQuestions.filter(q => q.id !== this.currentQuestion.id);
-    if(this.currentQuestion.level === 'hard') {
-      this.categoryScores[this.currentQuestion.category].total+=75;
-    }
-    else {
-      this.categoryScores[this.currentQuestion.category].total+=25;
-    }
-    if(this.currentAnswer === this.currentQuestion.answer){
-      this.score = this.currentQuestion.level === 'easy'? this.score + 1 : this.score + 2;
-      if(this.currentQuestion.level === 'hard'){
-        this.hardAnswer++;
-        this.categoryScores[this.currentQuestion.category].score+=75;
+    console.log(this.choosenCategory);
+    if(this.choosenCategory === ''){
+      let nextCategory = true;
+      if(this.currentCategory === this.categories.length - 1){
+        this.result = true;
       }
-      if(this.currentQuestion.level === 'easy'){
-        this.easyAnswer++;
-        this.categoryScores[this.currentQuestion.category].score+=25;
-        this.currentCategoryQuestions = this.currentCategoryQuestions.filter(q => q.level === 'hard');
-        if(this.currentCategoryQuestions.length > 0){
-          nextCategory = false;
-          this.currentQuestion = this.currentCategoryQuestions[Math.floor(Math.random() * this.currentCategoryQuestions.length)];
-          this.currentType = this.currentQuestion.type;
+      if(this.currentQuestion.level === 'hard') {
+        this.hardQuestions++;
+      }
+      else {
+        this.easyQuestions++;
+      }
+      this.totalQuestions ++;
+      this.currentCategoryQuestions = this.currentCategoryQuestions.filter(q => q.id !== this.currentQuestion.id);
+      if(this.currentQuestion.level === 'hard') {
+        this.categoryScores[this.currentQuestion.category].total+=75;
+      }
+      else {
+        this.categoryScores[this.currentQuestion.category].total+=25;
+      }
+      if(this.currentAnswer === this.currentQuestion.answer){
+        this.score = this.currentQuestion.level === 'easy'? this.score + 1 : this.score + 2;
+        if(this.currentQuestion.level === 'hard'){
+          this.hardAnswer++;
+          this.categoryScores[this.currentQuestion.category].score+=75;
+        }
+        if(this.currentQuestion.level === 'easy'){
+          this.easyAnswer++;
+          this.categoryScores[this.currentQuestion.category].score+=25;
+          this.currentCategoryQuestions = this.currentCategoryQuestions.filter(q => q.level === 'hard');
+          if(this.currentCategoryQuestions.length > 0){
+            nextCategory = false;
+            this.currentQuestion = this.currentCategoryQuestions[Math.floor(Math.random() * this.currentCategoryQuestions.length)];
+            this.currentType = this.currentQuestion.type;
+          }
         }
       }
+      if(nextCategory === true && !this.result){
+        this.currentCategory++;
+        this.currentCategoryQuestions = this.getCategoryQuestions(this.categories[this.currentCategory]);
+        const easy = this.currentCategoryQuestions.filter(q => q.level === 'easy');
+        this.currentQuestion = easy[Math.floor(Math.random() * easy.length)];
+        this.currentType = this.currentQuestion.type;
+      }
     }
-    if(nextCategory === true && !this.result){
-      this.currentCategory++;
-      this.currentCategoryQuestions = this.getCategoryQuestions(this.categories[this.currentCategory]);
-      const easy = this.currentCategoryQuestions.filter(q => q.level === 'easy');
-      this.currentQuestion = easy[Math.floor(Math.random() * easy.length)];
-      this.currentType = this.currentQuestion.type;
+    else{
+      console.log('hi');
+      if(this.currentQuestion.level === 'hard') {
+        this.hardQuestions++;
+      }
+      else {
+        this.easyQuestions++;
+      }
+      this.totalQuestions ++;
+      this.currentCategoryQuestions = this.currentCategoryQuestions.filter(q => q.id !== this.currentQuestion.id);
+      if(this.currentQuestion.level === 'hard') {
+        this.categoryScores[this.currentQuestion.category].total+=75;
+      }
+      else {
+        this.categoryScores[this.currentQuestion.category].total+=25;
+      }
+      if(this.currentAnswer === this.currentQuestion.answer){
+        this.score = this.currentQuestion.level === 'easy'? this.score + 1 : this.score + 2;
+        if(this.currentQuestion.level === 'hard'){
+          this.hardAnswer++;
+          this.categoryScores[this.currentQuestion.category].score+=75;
+        }
+        if(this.currentQuestion.level === 'easy'){
+          this.easyAnswer++;
+          this.categoryScores[this.currentQuestion.category].score+=25;
+        }
+      }
+      console.log(this.currentCategoryQuestions);
+      if(this.currentCategoryQuestions.length > 0){
+        this.currentQuestion = this.currentCategoryQuestions[Math.floor(Math.random() * this.currentCategoryQuestions.length)];
+        this.currentType = this.currentQuestion.type;
+      }else
+      {
+        this.result = true;
+      }
     }
     if(this.result){
       // for(let i = 0; i < 6; ++i){
       //   this.chartOptions.series[0].data[i] =
       // }
+      if(this.choosenCategory === ''){
+        this.secondChart = true;
+      }
       let i = 0;
       this.categories.forEach(category => {
         this.chartOptions.series[0].data[i]=(this.categoryScores[category].score/this.categoryScores[category].total) * 100;
@@ -204,10 +255,32 @@ export class TabsPage implements OnInit{
 
     }
     this.currentAnswer = '';
-
   }
 
   setAnswer(event: any){
     this.currentAnswer = event.detail.value;
+  }
+
+  setCategory(event: any){
+    this.choosenCategory = event.detail.value;
+  }
+  makeCategortyBased(){
+    this.categoryBased = true;
+    this.startBox = false;
+  }
+
+  makeStart(){
+    this.startBox = false;
+    this.categoryBased = false;
+    this.startTest = true;
+    if(this.choosenCategory === ''){
+      this.currentCategoryQuestions = this.getCategoryQuestions('psychometric');
+    }
+    else
+    {this.currentCategoryQuestions = this.getCategoryQuestions(this.choosenCategory);}
+    const easy = this.currentCategoryQuestions.filter(q => q.level === 'easy');
+    this.currentQuestion = easy[Math.floor(Math.random() * easy.length)];
+    this.attendedQuestion.push(this.currentQuestion.id);
+    this.currentType = this.currentQuestion.type;
   }
 }
