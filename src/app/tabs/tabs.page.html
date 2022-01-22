@@ -6,6 +6,33 @@
   </header>
 </div>
 <div class="card-center" *ngIf="startBox">
+  <ion-card class="normal-box" *ngIf="!result">
+    <ion-card-header class="heading1">
+      <b>Current Profession</b>
+    </ion-card-header>
+    <div class="items">
+      <ion-card-content>
+        <ion-button
+          fill="solid"
+          class="item-one"
+          size="medium"
+          color="warning"
+          (click)="makeCategortyBased()"
+          >Student</ion-button
+        >
+        <ion-button
+          fill="solid"
+          size="medium"
+          class="item-one"
+          color="warning"
+          (click)="makeStart()"
+          >Job-Seeker</ion-button
+        >
+      </ion-card-content>
+    </div>
+  </ion-card>
+</div>
+<!-- <div class="card-center" *ngIf="startBox">
   <ion-card class="start-box" *ngIf="!result">
     <ion-card-content>
       <ion-button
@@ -26,7 +53,7 @@
       >
     </ion-card-content>
   </ion-card>
-</div>
+</div> -->
 <div class="card-center" *ngIf="categoryBased">
   <ion-card class="questions" *ngIf="!result">
     <ion-card-content>

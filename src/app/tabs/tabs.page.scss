@@ -28,7 +28,32 @@
     border: 2px #926239 solid;
 }
 
+.normal-box{
+    color: black;
+    background-color: transparent;
+    border: 2px #926239 solid;
+    width: 50%;
+    height: 25%;
+}
+
+.items{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+.item-one{
+  // padding: 10px;
+  // margin: 10px;
+  // width: 100%;
+  // height: auto;
+
+}
 .result{
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -48,6 +73,17 @@
     font-weight: bolder;
     // background: linear-gradient(to bottom, #323232 0%, #3F3F3F 40%, #1C1C1C 150%), linear-gradient(to top, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.25) 200%);
     // background-blend-mode: multiply;
+}
+.heading1{
+  border-radius: 4px;
+  margin-left: 0px;
+  color: black;
+  font-size: 25px;
+  font-weight: bolder;
+  display: flex;
+  justify-content: center;
+  // background: linear-gradient(to bottom, #323232 0%, #3F3F3F 40%, #1C1C1C 150%), linear-gradient(to top, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.25) 200%);
+  // background-blend-mode: multiply;
 }
 
 .answer-desc{
@@ -78,23 +114,23 @@
   align-content: center;
 }
 
-.items:nth-child(1) {
-  display: block;
-  flex-grow: 0;
-  flex-shrink: 1;
-  flex-basis: auto;
-  align-self: auto;
-  order: 0;
-}
+// .items:nth-child(1) {
+//   display: block;
+//   flex-grow: 0;
+//   flex-shrink: 1;
+//   flex-basis: auto;
+//   align-self: auto;
+//   order: 0;
+// }
 
-.items:nth-child(2) {
-  display: block;
-  flex-grow: 0;
-  flex-shrink: 1;
-  flex-basis: auto;
-  align-self: auto;
-  order: 0;
-}
+// .items:nth-child(2) {
+//   display: block;
+//   flex-grow: 0;
+//   flex-shrink: 1;
+//   flex-basis: auto;
+//   align-self: auto;
+//   order: 0;
+// }
 
 ion-list{
     background-color: transparent;
