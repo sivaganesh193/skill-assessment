@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { GaugeChartModule } from 'angular-gauge-chart';
 import { TabsPageRoutingModule } from './tabs-routing.module';
-
+import {MatInputModule} from '@angular/material/input';
 
 import { TabsPage } from './tabs.page';
 import { NgApexchartsModule } from 'ng-apexcharts';
@@ -16,7 +16,8 @@ import { NgApexchartsModule } from 'ng-apexcharts';
     FormsModule,
     TabsPageRoutingModule,
     GaugeChartModule,
-    NgApexchartsModule
+    NgApexchartsModule,
+    MatInputModule
   ],
   declarations: [TabsPage]
 })

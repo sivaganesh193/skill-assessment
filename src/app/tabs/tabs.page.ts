@@ -29,8 +29,14 @@ export type ChartOptions = {
 export class TabsPage implements OnInit{
   @ViewChild('chart') chart: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
-
+  foods = [
+    {value: 'steak-0', viewValue: 'Steak'},
+    {value: 'pizza-1', viewValue: 'Pizza'},
+    {value: 'tacos-2', viewValue: 'Tacos'},
+  ];
   startBox = false;
+  studentBox = false;
+  jobBox = false;
   categoryBased = false;
   startTest = false;
   base = false;
@@ -269,7 +275,19 @@ export class TabsPage implements OnInit{
     this.startBox = false;
   }
 
+  makeJobBased(){
+    this.jobBox = true;
+    this.startBox = false;
+  }
+
+  makeStudentBased(){
+    this.studentBox = true;
+    this.startBox = false;
+  }
+
   makeStart(){
+    this.studentBox = false;
+    this.jobBox = false;
     this.startBox = false;
     this.categoryBased = false;
     this.startTest = true;
