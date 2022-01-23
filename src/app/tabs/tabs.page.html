@@ -1,3 +1,20 @@
+<!-- <ion-header class="header" collapse="fade" [translucent]="true">
+  <ion-toolbar>
+    <img class="logoimg" src="../../assets/Freshminds.png" alt="Logo" />
+    <ion-title id="head">Skill Meter</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<div class="header">
+  <!-- <a href="#default" class="logo">CompanyLogo</a> -->
+  <img class="logo" src="../../assets/Freshminds.png" alt="Logo" />
+  <div class="header-right">
+    <a class="active">Home</a>
+    <a>Contact</a>
+    <a>About</a>
+  </div>
+</div>
+
 <div class="landing" *ngIf="!base">
   <header id="showcase">
     <h1>Skill Meter</h1>
@@ -103,7 +120,7 @@
         <!-- <ion-item color="warning">
           <ion-input placeholder="Graduation Year"></ion-input>
         </ion-item> -->
-        <ion-item color="warning">
+        <ion-item color="warning" interface="popover">
           <ion-label class="select"><b>Graduation Year</b></ion-label>
           <ion-select class="select" value="2010">
             <ion-select-option value="1989">2010</ion-select-option>
@@ -259,23 +276,46 @@
         size="large"
         color="warning"
         (click)="nextQuestion()"
-        [disabled]="currentAnswer===''"
         >Download Your Skill Report</ion-button
       >
     </ion-card-content>
   </ion-card>
+  <div class="result_part">
+    <ion-button
+      *ngIf="result"
+      fill="solid"
+      class="next"
+      size="medium"
+      color="warning"
+      >Skill Gap Courses</ion-button
+    >
+    <ion-button
+      *ngIf="result"
+      fill="solid"
+      class="next"
+      size="medium"
+      color="warning"
+      >Forward Profile to Companies</ion-button
+    >
+  </div>
 </div>
 <ion-footer>
   <ion-toolbar>
-    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"
-      ><img
-        alt="Creative Commons License"
-        style="border-width: 0"
-        src="https://i.creativecommons.org/l/by/4.0/88x31.png"
-    /></a>
-    This work is licensed under a
-    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"
-      >Creative Commons Attribution 4.0 International License</a
-    >.
+    <div class="footer">
+      <div>
+        <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"
+          ><img
+            alt="Creative Commons License"
+            style="border-width: 0"
+            src="https://i.creativecommons.org/l/by/4.0/88x31.png"
+        /></a>
+      </div>
+      <div style="margin-left: 20px">
+        This work is licensed under a
+        <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"
+          >Creative Commons Attribution 4.0 International License</a
+        >.
+      </div>
+    </div>
   </ion-toolbar>
 </ion-footer>
