@@ -54,6 +54,23 @@
   font-size: 20px;
   border: 2px #926239 solid;
 }
+.fx{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+  align-items: flex-end;
+  align-content: flex-end;
+}
+.items_main{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-content: space-between;
+  align-items: center;
+  padding: 40px;
+}
 .items{
   display: flex;
   flex-direction: row;
@@ -68,8 +85,7 @@
   // margin: 10px;
   // width: 100%;
   // height: auto;
-
-
+  font-size: 20px;
 }
 .item-onee{
   // padding: 10px;

@@ -7,7 +7,7 @@
 </div>
 <div class="card-center" *ngIf="startBox">
   <ion-card class="normal-box" *ngIf="!result">
-    <div class="items">
+    <div class="items_main">
       <ion-card-content>
         <ion-button
           fill="solid"
@@ -45,14 +45,16 @@
           <ion-input placeholder="Branch"></ion-input>
         </ion-item>
         <br />
-        <ion-button
-          fill="solid"
-          size="medium"
-          class="item-one"
-          color="warning"
-          (click)="makeStart()"
-          >Start</ion-button
-        >
+        <div class="fx">
+          <ion-button
+            fill="solid"
+            size="medium"
+            class="item-one"
+            color="warning"
+            (click)="makeStart()"
+            >Start</ion-button
+          >
+        </div>
       </ion-card-content>
     </div>
   </ion-card>
@@ -118,14 +120,16 @@
           </ion-select>
         </ion-item>
         <br />
-        <ion-button
-          fill="solid"
-          size="medium"
-          class="item-one"
-          color="warning"
-          (click)="makeStart()"
-          >Start</ion-button
-        >
+        <div class="fx">
+          <ion-button
+            fill="solid"
+            size="medium"
+            class="item-one"
+            color="warning"
+            (click)="makeStart()"
+            >Start</ion-button
+          >
+        </div>
       </ion-card-content>
     </div>
   </ion-card>
