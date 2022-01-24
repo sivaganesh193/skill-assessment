@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { QUESTIONS } from './questions';
 import { Question} from './question';
+import { BackendService } from './backend.service';
+
 import {
   ApexAxisChartSeries,
   ApexChart,
@@ -55,6 +57,8 @@ export class TabsPage implements OnInit{
   hardAnswer = 0;
   hardQuestions = 0;
   secondChart = false;
+  testId: number;
+  userId: number;
   categories: string[] = ['psychometric', 'aptitude', 'creativity', 'adaptability', 'verbal', 'teamwork'];
   difficulties: string[] = ['easy','hard'];
   public canvasWidth = 300;
@@ -99,7 +103,7 @@ export class TabsPage implements OnInit{
     }
   };
 
-  constructor() {
+  constructor( private backendService: BackendService) {
     this.chartOptions = {
       fill: {
         colors: ['#FCE4D6', '#F8CBAD','#F4B084','#C65911','#833C0C','#926239']
@@ -144,6 +148,8 @@ export class TabsPage implements OnInit{
   }
 
   ngOnInit() {
+    this.testId = Math.floor(100000 + Math.random() * 900000);
+    this.userId = Math.floor(100000 + Math.random() * 900000);
     this.currentCategoryQuestions = this.getCategoryQuestions('psychometric');
     const easy = this.currentCategoryQuestions.filter(q => q.level === 'easy');
     this.currentQuestion = easy[Math.floor(Math.random() * easy.length)];
@@ -162,6 +168,18 @@ export class TabsPage implements OnInit{
 
   nextQuestion(){
     console.log(this.choosenCategory);
+    if(this.currentType === 'descriptive'){
+      const obj = {
+        uid :this.userId,
+        tid :this.testId,
+        ques : this.currentQuestion.id,
+        ans : this.currentAnswer
+      };
+      this.backendService.postLogs(obj).subscribe(res =>
+        {
+          console.log(res);
+        },err => console.log(err));
+    }
     if(this.choosenCategory === ''){
       let nextCategory = true;
       if(this.currentCategory === this.categories.length - 1){
@@ -258,7 +276,12 @@ export class TabsPage implements OnInit{
       this.finalScore = ((this.easyAnswer / this.easyQuestions) * 25) + ((this.hardAnswer / this.hardQuestions) * 75);
       this.bottomLabel =  this.finalScore.toFixed(2).toString() + '%';
       console.log(this.categoryScores);
-
+      const resObj = {
+        uid : this.userId,
+        tid : this.testId,
+        score : this.finalScore
+      };
+      this.backendService.postResults(resObj).subscribe(res => console.log(res),err => console.log(err));
     }
     this.currentAnswer = '';
   }
